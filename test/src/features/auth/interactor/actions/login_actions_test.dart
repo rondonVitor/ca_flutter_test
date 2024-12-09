@@ -1,9 +1,9 @@
 import 'package:ca_flutter_test/src/core/errors/base_error.dart';
 import 'package:ca_flutter_test/src/features/auth/interactor/actions/login_actions.dart';
 import 'package:ca_flutter_test/src/features/auth/interactor/atoms/login_atoms.dart';
-import 'package:ca_flutter_test/src/features/auth/interactor/dtos/login_dto.dart';
-import 'package:ca_flutter_test/src/features/auth/interactor/entities/token_entity.dart';
-import 'package:ca_flutter_test/src/features/auth/interactor/services/i_auth_service.dart';
+import 'package:ca_flutter_test/src/shared/auth/interactor/dtos/login_dto.dart';
+import 'package:ca_flutter_test/src/shared/auth/interactor/entities/token_entity.dart';
+import 'package:ca_flutter_test/src/shared/auth/interactor/services/i_auth_service.dart';
 import 'package:ca_flutter_test/src/features/auth/interactor/states/login_state.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -53,7 +53,8 @@ void main() {
           );
 
           doLoginAction(
-            loginDTO,
+            loginDTO.username,
+            loginDTO.password,
           );
         },
       );
@@ -86,7 +87,8 @@ void main() {
           );
 
           doLoginAction(
-            loginDTO,
+            loginDTO.username,
+            loginDTO.password,
           );
         },
       );

@@ -1,6 +1,7 @@
 import 'package:ca_flutter_test/src/features/home/data/services/product_service.dart';
 import 'package:ca_flutter_test/src/features/home/interactor/services/i_product_service.dart';
 import 'package:ca_flutter_test/src/features/home/ui/product_detail_page.dart';
+import 'package:ca_flutter_test/src/shared/shared_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../core/core_module.dart';
@@ -10,6 +11,7 @@ class HomeModule extends Module {
   @override
   List<Module> get imports => [
         CoreModule(),
+        SharedModule(),
       ];
 
   @override

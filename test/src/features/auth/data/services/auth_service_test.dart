@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:ca_flutter_test/src/core/http_service/client_response.dart';
 import 'package:ca_flutter_test/src/core/http_service/http_service.dart';
-import 'package:ca_flutter_test/src/features/auth/data/adapters/login_dto_adapter.dart';
-import 'package:ca_flutter_test/src/features/auth/data/services/auth_service.dart';
-import 'package:ca_flutter_test/src/features/auth/interactor/dtos/login_dto.dart';
-import 'package:ca_flutter_test/src/features/auth/interactor/errors/auth_errors.dart';
-import 'package:ca_flutter_test/src/features/auth/interactor/services/i_auth_service.dart';
+import 'package:ca_flutter_test/src/shared/auth/data/adapters/login_dto_adapter.dart';
+import 'package:ca_flutter_test/src/shared/auth/data/services/auth_service.dart';
+import 'package:ca_flutter_test/src/shared/auth/interactor/dtos/login_dto.dart';
+import 'package:ca_flutter_test/src/shared/auth/interactor/errors/auth_errors.dart';
+import 'package:ca_flutter_test/src/shared/auth/interactor/services/i_auth_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

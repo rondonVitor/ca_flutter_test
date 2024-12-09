@@ -1,8 +1,10 @@
 import 'package:asp/asp.dart';
 import 'package:ca_flutter_test/src/features/home/interactor/actions/home_actions.dart';
-import 'package:ca_flutter_test/src/features/home/interactor/atoms/home_atoms.dart';
-import 'package:ca_flutter_test/src/features/home/interactor/states/home_state.dart';
-import 'package:ca_flutter_test/src/features/home/ui/widgets/product_card_widget.dart';
+import 'package:ca_flutter_test/src/features/home/ui/favorite_products_page.dart';
+import 'package:ca_flutter_test/src/features/home/ui/products_list_page.dart';
+import 'package:ca_flutter_test/src/shared/user/interactor/actions/user_actions.dart';
+import 'package:ca_flutter_test/src/shared/user/interactor/atoms/user_atoms.dart';
+import 'package:ca_flutter_test/src/shared/user/interactor/entities/user_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -14,6 +16,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with HookStateMixin {
+  int _selectedIndex = 0;
+  final PageController _pageController = PageController();
+
   @override
   void initState() {
     super.initState();
@@ -21,60 +26,74 @@ class _HomePageState extends State<HomePage> with HookStateMixin {
     getHomeProductsAction();
   }
 
+  _userStateListener(UserEntity? user) {
+    if (user == null) {
+      Modular.to.navigate('/auth');
+    }
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    _pageController.jumpToPage(index);
+  }
+
+  final List<Widget> _pages = [
+    const ProductsListPage(),
+    const FavoriteProductsPage(),
+  ];
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+
+    useAtomEffect((get) => get(userState), effect: _userStateListener);
 
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Conta Azul E-coommerce',
+          'Conta Azul E-commerce',
           style: textTheme.titleLarge?.copyWith(
             fontWeight: FontWeight.bold,
           ),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.exit_to_app,
+            ),
+            onPressed: () {
+              logoutAction();
+            },
+          ),
+        ],
       ),
-      body: AtomBuilder(
-        builder: (context, get) {
-          final state = get(homeState);
-          if (state is HomeErrorState) {
-            return Column(
-              children: [
-                ElevatedButton(
-                    onPressed: () {
-                      getHomeProductsAction();
-                    },
-                    child: const Text('aqui')),
-                Center(
-                  child: Text(
-                    'Ocorreu um erro ao trazer os produtos, tente novamente mais tarde.',
-                    style: textTheme.bodyLarge,
-                  ),
-                ),
-              ],
-            );
-          }
-
-          if (state is HomeSuccessState) {
-            return ListView.builder(
-              itemCount: state.products.length,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    Modular.to.pushNamed('./product-detail',
-                        arguments: state.products[index]);
-                  },
-                  child: ProductCardWidget(
-                    product: state.products[index],
-                  ),
-                );
-              },
-            );
-          }
-
-          return const CircularProgressIndicator();
-        },
+      body: PageView(
+        controller: _pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        children: _pages,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: _onItemTapped,
+        currentIndex: _selectedIndex,
+        items: const [
+          BottomNavigationBarItem(
+            label: 'Home',
+            icon: Icon(Icons.home),
+          ),
+          BottomNavigationBarItem(
+            label: 'Favoritos',
+            icon: Icon(Icons.favorite_border),
+          ),
+        ],
       ),
     );
   }

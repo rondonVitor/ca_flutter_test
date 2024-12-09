@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:ca_flutter_test/src/core/errors/base_error.dart';
 import 'package:ca_flutter_test/src/features/home/interactor/entities/product_entity.dart';
 
@@ -21,4 +22,12 @@ class HomeSuccessState extends IHomeState {
   HomeSuccessState({
     required this.products,
   });
+
+  HomeSuccessState copyWith({
+    List<ProductEntity>? products,
+  }) {
+    return HomeSuccessState(
+      products: products ?? this.products,
+    );
+  }
 }

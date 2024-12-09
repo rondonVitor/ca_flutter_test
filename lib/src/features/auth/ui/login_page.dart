@@ -1,11 +1,11 @@
 import 'package:asp/asp.dart';
 import 'package:asuka/asuka.dart';
+import 'package:ca_flutter_test/src/shared/user/interactor/actions/user_actions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../interactor/actions/login_actions.dart';
 import '../interactor/atoms/login_atoms.dart';
-import '../interactor/dtos/login_dto.dart';
 import '../interactor/states/login_state.dart';
 
 class LoginPage extends StatelessWidget with HookMixin {
@@ -16,6 +16,10 @@ class LoginPage extends StatelessWidget with HookMixin {
 
   _loginStateListener(ILoginState state) {
     if (state is LoginSuccessState) {
+      setUserStorageAction(
+        usernameText.text,
+        passwordText.text,
+      );
       Modular.to.navigate('/home/');
     }
 
@@ -81,10 +85,8 @@ class LoginPage extends StatelessWidget with HookMixin {
                       ? null
                       : () {
                           doLoginAction(
-                            LoginDTO(
-                              username: usernameText.text,
-                              password: passwordText.text,
-                            ),
+                            usernameText.text,
+                            passwordText.text,
                           );
                         },
                   child: isLoading

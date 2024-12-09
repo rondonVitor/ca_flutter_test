@@ -1,5 +1,5 @@
 import 'package:ca_flutter_test/src/core/errors/base_error.dart';
-import 'package:ca_flutter_test/src/features/auth/data/adapters/token_entity_adapter.dart';
+import 'package:ca_flutter_test/src/shared/auth/data/adapters/token_entity_adapter.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

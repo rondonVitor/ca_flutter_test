@@ -38,4 +38,24 @@ class ProductEntity {
         description.hashCode ^
         imageUrl.hashCode;
   }
+
+  ProductEntity copyWith({
+    int? id,
+    String? title,
+    String? price,
+    String? category,
+    String? description,
+    String? imageUrl,
+    bool? isFavorite,
+  }) {
+    return ProductEntity(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      price: price ?? this.price,
+      category: category ?? this.category,
+      description: description ?? this.description,
+      imageUrl: imageUrl ?? this.imageUrl,
+      isFavorite: isFavorite ?? this.isFavorite,
+    );
+  }
 }

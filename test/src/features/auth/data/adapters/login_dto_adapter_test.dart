@@ -1,5 +1,5 @@
-import 'package:ca_flutter_test/src/features/auth/data/adapters/login_dto_adapter.dart';
-import 'package:ca_flutter_test/src/features/auth/interactor/dtos/login_dto.dart';
+import 'package:ca_flutter_test/src/shared/auth/data/adapters/login_dto_adapter.dart';
+import 'package:ca_flutter_test/src/shared/auth/interactor/dtos/login_dto.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

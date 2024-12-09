@@ -1,3 +1,4 @@
+import 'package:ca_flutter_test/src/features/home/interactor/actions/favorite_actions.dart';
 import 'package:ca_flutter_test/src/features/home/interactor/entities/product_entity.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,15 @@ class ProductDetailPage extends StatefulWidget {
 }
 
 class _ProductDetailPageState extends State<ProductDetailPage> {
+  bool isLiked = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    isLiked = widget.product.isFavorite;
+  }
+
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -31,7 +41,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   widget.product.imageUrl,
                   height: 300,
                   width: double.infinity,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
                 ),
               ),
             ),
@@ -68,13 +78,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // setState(() {
-          //   widget.product.isFavorite = !widget.product.isFavorite;
-          // });
+          setState(() {
+            isLiked = !isLiked;
+            likeProductAction(widget.product.id);
+          });
         },
         backgroundColor: Colors.white,
         child: Icon(
-          widget.product.isFavorite ? Icons.favorite : Icons.favorite_border,
+          isLiked ? Icons.favorite : Icons.favorite_border,
           color: Colors.red,
         ),
       ),

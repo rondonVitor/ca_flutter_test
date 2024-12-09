@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:uno/uno.dart';
 
 import 'http_service/http_factory.dart';
@@ -14,5 +15,6 @@ class CoreModule extends Module {
         () => HttpFactory.createUno(baseUrl: 'https://fakestoreapi.com'));
     i.add<Connectivity>(Connectivity.new);
     i.addSingleton<IHttpService>(HttpService.new);
+    i.add<FlutterSecureStorage>(FlutterSecureStorage.new);
   }
 }

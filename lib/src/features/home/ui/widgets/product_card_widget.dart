@@ -1,3 +1,4 @@
+import 'package:ca_flutter_test/src/features/home/interactor/actions/favorite_actions.dart';
 import 'package:ca_flutter_test/src/features/home/interactor/entities/product_entity.dart';
 import 'package:flutter/material.dart';
 
@@ -60,7 +61,9 @@ class ProductCardWidget extends StatelessWidget {
                               : Icons.favorite_border,
                           color: product.isFavorite ? Colors.red : Colors.grey,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          likeProductAction(product.id);
+                        },
                       ),
                     ],
                   ),

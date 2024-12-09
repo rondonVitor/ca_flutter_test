@@ -1,4 +1,5 @@
 import 'package:asuka/asuka.dart';
+import 'package:ca_flutter_test/src/design_system/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -16,7 +17,7 @@ class AppWidget extends StatelessWidget {
     return MaterialApp.router(
       title: 'CA Products',
       builder: Asuka.builder,
-      theme: ThemeData(colorSchemeSeed: const Color(0xff54a1ee)),
+      theme: AppTheme.theme,
       routerConfig: Modular.routerConfig,
       debugShowCheckedModeBanner: false,
     );
