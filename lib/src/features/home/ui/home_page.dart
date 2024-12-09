@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> with HookStateMixin {
 
   _userStateListener(UserEntity? user) {
     if (user == null) {
-      Modular.to.navigate('/auth');
+      Modular.to.navigate('/auth/');
     }
   }
 
