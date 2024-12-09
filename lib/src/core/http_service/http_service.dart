@@ -193,15 +193,15 @@ class HttpService implements IHttpService {
   }
 
   FutureOr<Request> interceptRequest(Request request) async {
-    return request;
-  }
-
-  FutureOr<Response> interceptResponse(Response response) async {
     final connectivityResult = await _connectivity.checkConnectivity();
     if (!connectivityResult.contains(ConnectivityResult.wifi)) {
       throw NetworkError();
     }
 
+    return request;
+  }
+
+  FutureOr<Response> interceptResponse(Response response) async {
     return response;
   }
 
